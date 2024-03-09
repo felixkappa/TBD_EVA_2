@@ -1,0 +1,234 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \SQL
+Unknown command: '\SQL'
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 12 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> use tb2;
+MySQL Error 1049: Unknown database 'tb2'
+MySQL [localhost:33060+ ssl] SQL> use tbd2;
+Default schema set to `tbd2`.
+Fetching global names, object names from `tbd2` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones
+                                    -> drop constarint diecciones_ibfk_1;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'diecciones_ibfk_1' at line 2
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones drop constarint diecciones_ibfk_1;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'diecciones_ibfk_1' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones
+                                    -> drop constraint diecciones_ibfk_1;
+ERROR: 3940: Constraint 'diecciones_ibfk_1' does not exist.
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones drop constraint direcciones_ibfk_1;
+Query OK, 0 rows affected (0.2135 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> show create table direcciones;
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+| Table       | Create Table
+
+
+                   |
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+| direcciones | CREATE TABLE `direcciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_clientes` int NOT NULL,
+  `calle` varchar(50) NOT NULL,
+  `colonia` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_clientes` (`id_clientes`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+1 row in set (0.0355 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)values(6"")
+                                       insert into direcciones(id_clientes,calle,colonia)values(6"")
+                                       insert into direcciones(id_clientes,calle,colonia)values(6"rg
+reg","weryytr");
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '"rgreg","weryytr")' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)value(6"rgr
+eg","weryytr");
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '"rgreg","weryytr")' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)value(6",rg
+reg","weryytr");
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '",rgreg","weryytr")' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)values(6",r
+greg","weryytr");
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '",rgreg","weryytr")' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)values(6,"r
+greg","weryytr");
+Query OK, 1 row affected (0.1025 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(idcliente)
+                                       alter table direcciones add constraint foreign key(id_cliente
+)references clientes(id) on delete restrict on update cascade;
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete from direcciones where id_clientes = 6;
+Query OK, 1 row affected (0.1977 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(id_cliente
+)references clientes(id) on delete restrict on update cascade;
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(id_cliente
+)references clientes(id) on delete restrict on update cascade;
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete from direcciones where id_clientes = 5;
+Query OK, 1 row affected (0.0732 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> update clientes set id = 10 where id = 3;
+Query OK, 1 row affected (0.0837 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
+Empty set (0.0013 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from clientes;
++----+--------+-----------+------------+
+| id | nombre | apellidos | fecha_nac  |
++----+--------+-----------+------------+
+|  5 | Juan   | Perez     | 1910-10-20 |
+| 10 | Jorge  | Elcurioso | 2020-10-05 |
++----+--------+-----------+------------+
+2 rows in set (0.0020 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> show create table direcciones;
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+| Table       | Create Table
+
+
+                   |
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+| direcciones | CREATE TABLE `direcciones` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_clientes` int NOT NULL,
+  `calle` varchar(50) NOT NULL,
+  `colonia` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_clientes` (`id_clientes`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-------------+-------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-------------------+
+1 row in set (0.0024 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones drop constraint direcciones_ibfk_1;
+ERROR: 3940: Constraint 'direcciones_ibfk_1' does not exist.
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(id_cliente
+)references clientes(id) on delete restrict on update cascade;
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete * from clientes where id = 2;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '* from clientes where id = 2' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from clientes;
++----+--------+-----------+------------+
+| id | nombre | apellidos | fecha_nac  |
++----+--------+-----------+------------+
+|  5 | Juan   | Perez     | 1910-10-20 |
+| 10 | Jorge  | Elcurioso | 2020-10-05 |
++----+--------+-----------+------------+
+2 rows in set (0.0013 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
+Empty set (0.0011 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete * from clientes where id = 2;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '* from clientes where id = 2' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from clientes;
++----+--------+-----------+------------+
+| id | nombre | apellidos | fecha_nac  |
++----+--------+-----------+------------+
+|  5 | Juan   | Perez     | 1910-10-20 |
+| 10 | Jorge  | Elcurioso | 2020-10-05 |
++----+--------+-----------+------------+
+2 rows in set (0.0019 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
+Empty set (0.0020 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_cliente,calle,colonia)values(11"")
+                                       insert into direcciones(id_cliente,calle,colonia)values(11"")
+                                       insert into direcciones(id_cliente,calle,colonia)values(11"")
+                                       insert into direcciones(id_cliente,calle,colonia)values(11,"G
+reace","Hopper");
+ERROR: 1054: Unknown column 'id_cliente' in 'field list'
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(id_cliente
+)references clientes(id) on delete restrict on update cascade;
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones add constraint foreign key(id_cliente
+s)references clientes(id) on delete restrict on update cascade;
+Query OK, 0 rows affected (1.5704 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_cliente,calle,colonia)values(11,"G
+reace","Hopper");
+ERROR: 1054: Unknown column 'id_cliente' in 'field list'
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)values(11,"
+Greace","Hopper");
+ERROR: 1452: Cannot add or update a child row: a foreign key constraint fails (`tbd2`.`direcciones`,
+ CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DELETE
+RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> alter table direcciones drop constraint direcciones_ibfk_1;
+Query OK, 0 rows affected (0.1499 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia)values(11,"
+Greace","Hopper");
+Query OK, 1 row affected (0.0860 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(nombre,apellido,fecha_nac)values("Pedr")
+                                       insert into clientes(nombre,apellido,fecha_nac)values("Pedr")
+                                       insert into clientes(nombre,apellido,fecha_nac)values("Pedr")
+                                       insert into clientes(nombre,apellido,fecha_nac)values("Pedro"
+,"Palomo","2000-01-07");
+ERROR: 1054: Unknown column 'apellido' in 'field list'
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(nombre,apellidos,fecha_nac)values("Pedro
+","Palomo","2000-01-07");
+Query OK, 1 row affected (0.1665 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(nombre,apellidos,fecha_nac)values("Sebas
+","Gomez","2000-01-07");
+Query OK, 1 row affected (0.1708 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from clientes;
++----+--------+-----------+------------+
+| id | nombre | apellidos | fecha_nac  |
++----+--------+-----------+------------+
+|  5 | Juan   | Perez     | 1910-10-20 |
+| 10 | Jorge  | Elcurioso | 2020-10-05 |
+| 11 | Pedro  | Palomo    | 2000-01-07 |
+| 12 | Sebas  | Gomez     | 2000-01-07 |
++----+--------+-----------+------------+
+4 rows in set (0.0014 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
++----+-------------+--------+---------+
+| id | id_clientes | calle  | colonia |
++----+-------------+--------+---------+
+|  8 |          11 | Greace | Hopper  |
++----+-------------+--------+---------+
+1 row in set (0.0012 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL>

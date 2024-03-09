@@ -1,0 +1,150 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+MySQL Error 2026: error:00000000:lib(0)::reason(0)
+MySQL SQL> \c mc-- root@localhost;
+Creating a session to 'root@localhost;'
+Please provide the password for 'root@localhost;': ****
+MySQL Error 2005: No such host is known 'localhost;'
+MySQL SQL> \c mc-- root@localhost;
+Creating a session to 'root@localhost;'
+Please provide the password for 'root@localhost;': ****
+MySQL Error 2005: No such host is known 'localhost;'
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 11 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> create database tbd2;
+Query OK, 1 row affected (0.7406 sec)
+MySQL [localhost:33060+ ssl] SQL> use tbd2;
+Default schema set to `tbd2`.
+Fetching global names, object names from `tbd2` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table clientes(id int auto_increment,nombre varchar ()
+                                       create table clientes(id int auto_increment,nombre varchar ()
+50) not null,apellidos varchar (50) not null,fecha_nac date not null);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near ')50) not null,apellidos varchar (50) not null,fecha_
+nac date not null)' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table clientes(id int key auto_increment,nombre varcha
+r ()50) not null,apellidos varchar (50) not null,fecha_nac date not null);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near ')50) not null,apellidos varchar (50) not null,fecha_
+nac date not null)' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table clientes(id int key auto_increment,nombre varcha
+r (50) not null,apellidos varchar (50) not null,fecha_nac date not null);
+Query OK, 0 rows affected (2.4774 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table direcciones(id int key auto_increment,id_client)
+                                       create table direcciones(id int key auto_increment,id_cliente
+s int not null,calle varchar (50) not ncreate table direcciones(id int key auto_increment,id_cliente
+s int not null,calle varchar (50) not null,colonia varchar (50) not null,foreign key (id_ciente) ref
+erences clientes (id) on delete restrict on update cascade);
+ERROR: 1072: Key column 'id_ciente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table direcciones(id int key auto_increment,id_cliente
+s int not null,calle varchar (50) not null,colonia varchar (50) not null,foreign key (id_cliente) re
+ferences clientes (id) on delete restrict on update cascade);
+ERROR: 1072: Key column 'id_cliente' doesn't exist in table
+MySQL [localhost:33060+ ssl/tbd2] SQL> create table direcciones(id int key auto_increment,id_cliente
+s int not null,calle varchar (50) not null,colonia varchar (50) not null,foreign key (id_clientes) r
+eferences clientes (id) on delete restrict on update cascade);
+Query OK, 0 rows affected (3.4254 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> desc clientes;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| id        | int         | NO   | PRI | NULL    | auto_increment |
+| nombre    | varchar(50) | NO   |     | NULL    |                |
+| apellidos | varchar(50) | NO   |     | NULL    |                |
+| fecha_nac | date        | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.0058 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> desc direcciones;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| id          | int         | NO   | PRI | NULL    | auto_increment |
+| id_clientes | int         | NO   | MUL | NULL    |                |
+| calle       | varchar(50) | NO   |     | NULL    |                |
+| colonia     | varchar(50) | NO   |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+4 rows in set (0.0057 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(id_clientes,calle,colonia) values (5,"")
+                                       insert into clientes(id_clientes,calle,colonia) values (5,"")
+                                       insert into clientes(id_clientes,calle,colonia) values (5,"ca
+mara","gato");
+ERROR: 1054: Unknown column 'id_clientes' in 'field list'
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia) values (5,
+"camara","gato");
+ERROR: 1452: Cannot add or update a child row: a foreign key constraint fails (`tbd2`.`direcciones`,
+ CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DELETE
+RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia) values (1,
+"camara","gato");
+ERROR: 1452: Cannot add or update a child row: a foreign key constraint fails (`tbd2`.`direcciones`,
+ CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DELETE
+RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia) values (1,
+"camara","gato");
+ERROR: 1452: Cannot add or update a child row: a foreign key constraint fails (`tbd2`.`direcciones`,
+ CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DELETE
+RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(nombre,apellidos,fecha_nac) values("Ju")
+                                       insert into clientes(nombre,apellidos,fecha_nac) values("Juan
+","Perez",'1910-10-20'),("Pedro","Paramos",'1999-11-06'),("Jorge","Elcurioso",''2020-10-05);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '2020-10-05)' at line 1
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into clientes(nombre,apellidos,fecha_nac) values("Juan
+","Perez",'1910-10-20'),("Pedro","Paramos",'1999-11-06'),("Jorge","Elcurioso",'2020-10-05');
+Query OK, 3 rows affected (0.2569 sec)
+
+Records: 3  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia) values (5,
+"camara","gato");
+ERROR: 1452: Cannot add or update a child row: a foreign key constraint fails (`tbd2`.`direcciones`,
+ CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DELETE
+RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> insert into direcciones(id_clientes,calle,colonia) values (1,
+"camara","gato");
+Query OK, 1 row affected (0.2064 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
++----+-------------+--------+---------+
+| id | id_clientes | calle  | colonia |
++----+-------------+--------+---------+
+|  5 |           1 | camara | gato    |
++----+-------------+--------+---------+
+1 row in set (0.0019 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete from clientes where id = 1;
+ERROR: 1451: Cannot delete or update a parent row: a foreign key constraint fails (`tbd2`.`direccion
+es`, CONSTRAINT `direcciones_ibfk_1` FOREIGN KEY (`id_clientes`) REFERENCES `clientes` (`id`) ON DEL
+ETE RESTRICT ON UPDATE CASCADE)
+MySQL [localhost:33060+ ssl/tbd2] SQL> delete from clientes where id = 2;
+Query OK, 1 row affected (0.0749 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from clientes;
++----+--------+-----------+------------+
+| id | nombre | apellidos | fecha_nac  |
++----+--------+-----------+------------+
+|  1 | Juan   | Perez     | 1910-10-20 |
+|  3 | Jorge  | Elcurioso | 2020-10-05 |
++----+--------+-----------+------------+
+2 rows in set (0.0019 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL> update clientes set id = 5 where id = 1;
+Query OK, 1 row affected (0.1012 sec)
+
+Rows matched: 1  Changed: 1  Warnings: 0
+MySQL [localhost:33060+ ssl/tbd2] SQL> select * from direcciones;
++----+-------------+--------+---------+
+| id | id_clientes | calle  | colonia |
++----+-------------+--------+---------+
+|  5 |           5 | camara | gato    |
++----+-------------+--------+---------+
+1 row in set (0.0018 sec)
+MySQL [localhost:33060+ ssl/tbd2] SQL>
