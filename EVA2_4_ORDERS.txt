@@ -1,0 +1,444 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 17 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> create database orders;
+Query OK, 1 row affected (0.6280 sec)
+MySQL [localhost:33060+ ssl] SQL> use orders
+Default schema set to `orders`.
+Fetching global names, object names from `orders` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/orders] SQL> create table customers(id_c int auto_increment primary key)
+                                         create table customers(id_c int auto_increment key not nul)
+                                         create table customers(id_c int auto_increment key not null
+,last_name varchar(50) not null,first_namcreate table customers(id_c int auto_increment key not null
+,last_name varchar(50) not null,first_namcreate table customers(id_c int auto_increment key not null
+,last_name varchar(50) not null,first_name varchar(50),company_name varchar(50),street_1 varchar(50)
+,city varchar(50),state varchar(50),zipcode varchar(50),phone int,fax varchar(50),e_mail varchar(50)
+s_id int not null);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 's_id int not null)' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> create table customers(id_c int auto_increment key not null
+,last_name varchar(50) not null,first_name varchar(50) not null,company_name varchar(50),street_1 va
+rchar(50),city varchar(50),state varchar(50),zipcode varchar(50),phone int,fax varchar(50),e_mail va
+rchar(50),s_id int not null);
+Query OK, 0 rows affected (1.5560 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> create table salesreps(s_id int key,last_name varchar(50),)
+                                         create table salesreps(s_id int key,last_name varchar(50) )
+                                         create table salesreps(s_id int key,last_name varchar(50) n
+ot null,first_name varchar(50) not null,commision int not null);
+Query OK, 0 rows affected (2.2522 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> create table orders(id_o int auto_increment key not null,i)
+                                         create table orders(id_o int auto_increment key not null,id
+_c int not null,order_date date not null,shipdate date,paiddate date,status varchar(50));
+Query OK, 0 rows affected (0.3407 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> create table items(id_i varchar(50) key not null,id_o int )
+                                         create table items(id_i varchar(50) key not null,id_o int n
+ot null,id_p varchar(50) not null,quanity int not null);
+Query OK, 0 rows affected (0.4044 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> create table parts(id_p varchar(50) key not null,decripcio)
+                                         create table parts(id_p varchar(50) key not null,decripcio)
+                                         create table parts(id_p varchar(50) key not null,decriptio)
+                                         create table parts(id_p varchar(50) key not null,decription
+ varchar(200) not null,unitpirce int not create table parts(id_p varchar(50) key not null,decription
+ varchar(200) not null,unitpirce int not null,onhand varchar (50)not null,reorder varchar(50) not nu
+ll);
+Query OK, 0 rows affected (0.5669 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> desc customers;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id_c         | int         | NO   | PRI | NULL    | auto_increment |
+| last_name    | varchar(50) | NO   |     | NULL    |                |
+| first_name   | varchar(50) | NO   |     | NULL    |                |
+| company_name | varchar(50) | YES  |     | NULL    |                |
+| street_1     | varchar(50) | YES  |     | NULL    |                |
+| city         | varchar(50) | YES  |     | NULL    |                |
+| state        | varchar(50) | YES  |     | NULL    |                |
+| zipcode      | varchar(50) | YES  |     | NULL    |                |
+| phone        | int         | YES  |     | NULL    |                |
+| fax          | varchar(50) | YES  |     | NULL    |                |
+| e_mail       | varchar(50) | YES  |     | NULL    |                |
+| s_id         | int         | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+12 rows in set (0.0061 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers
+                                      -> foreign key (s_id) references salesreps (s_id) on delete re
+                                         foreign key (s_id) references salesreps (s_id) on delete re
+strict on update cascade;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'foreign key (s_id) references salesreps (s_id) on de
+lete restrict on update casc' at line 2
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers (foreign key (s_id) references salesr
+eps (s_id) on delete restrict on update cascade);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '(foreign key (s_id) references salesreps (s_id) on d
+elete restrict on update cas' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers modify s_id (foreign key (s_id) refer
+ences salesreps (s_id) on delete restrict on update cascade);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near '(foreign key (s_id) references salesreps (s_id) on d
+elete restrict on update cas' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers modify s_id foreign key (s_id) refere
+nces salesreps (s_id) on delete restrict on update cascade;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'foreign key (s_id) references salesreps (s_id) on de
+lete restrict on update casc' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customer drop column s_id;
+ERROR: 1146: Table 'orders.customer' doesn't exist
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers drop column s_id;
+Query OK, 0 rows affected (0.3175 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> alter table cutomers add constraint parts_fk foreign key ()
+                                         alter table cutomers add constraint parts_fk foreign key ()
+                                         alter table cutomers add constraint parts_fk foreign key ()
+                                         alter table cutomers add constraint parts_fk foreign key (s
+_id) references salesreps (s_id) on delete cascade on update cascade;
+ERROR: 1146: Table 'orders.cutomers' doesn't exist
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint parts_fk foreign key (
+s_id) references salesreps (s_id) on delete cascade on update cascade;
+ERROR: 1072: Key column 's_id' doesn't exist in table
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint parts_fk foreign key (
+s_id) references salesreps (s_id) on delete cascade on update cascade;,
+ERROR: 1072: Key column 's_id' doesn't exist in table
+                                      -> desc salesresp;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near ',
+desc salesresp' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> desc salesrefs;
+ERROR: 1146: Table 'orders.salesrefs' doesn't exist
+MySQL [localhost:33060+ ssl/orders] SQL> desc salesreps;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| s_id       | int         | NO   | PRI | NULL    |       |
+| last_name  | varchar(50) | NO   |     | NULL    |       |
+| first_name | varchar(50) | NO   |     | NULL    |       |
+| commision  | int         | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0050 sec)
+MySQL [localhost:33060+ ssl/orders] SQL>
+
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+MySQL Error 2026: error:00000000:lib(0)::reason(0)
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 19 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> use orders;
+Default schema set to `orders`.
+Fetching global names, object names from `orders` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/orders] SQL> desc cutomers
+                                      -> desc cutomers;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'desc cutomers' at line 2
+MySQL [localhost:33060+ ssl/orders] SQL> desc cutomers desc customers;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL s
+erver version for the right syntax to use near 'desc customers' at line 1
+MySQL [localhost:33060+ ssl/orders] SQL> show tables;
++------------------+
+| Tables_in_orders |
++------------------+
+| customers        |
+| items            |
+| orders           |
+| parts            |
+| salesreps        |
++------------------+
+5 rows in set (0.0035 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> desc customers;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id_c         | int         | NO   | PRI | NULL    | auto_increment |
+| last_name    | varchar(50) | NO   |     | NULL    |                |
+| first_name   | varchar(50) | NO   |     | NULL    |                |
+| company_name | varchar(50) | YES  |     | NULL    |                |
+| street_1     | varchar(50) | YES  |     | NULL    |                |
+| city         | varchar(50) | YES  |     | NULL    |                |
+| state        | varchar(50) | YES  |     | NULL    |                |
+| zipcode      | varchar(50) | YES  |     | NULL    |                |
+| phone        | int         | YES  |     | NULL    |                |
+| fax          | varchar(50) | YES  |     | NULL    |                |
+| e_mail       | varchar(50) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+11 rows in set (0.0048 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> desc salesreps;;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| s_id       | int         | NO   | PRI | NULL    |       |
+| last_name  | varchar(50) | NO   |     | NULL    |       |
+| first_name | varchar(50) | NO   |     | NULL    |       |
+| commision  | int         | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0042 sec)
+ERROR: 1065: Query was empty
+MySQL [localhost:33060+ ssl/orders] SQL> desc salesreps;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| s_id       | int         | NO   | PRI | NULL    |       |
+| last_name  | varchar(50) | NO   |     | NULL    |       |
+| first_name | varchar(50) | NO   |     | NULL    |       |
+| commision  | int         | NO   |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+4 rows in set (0.0043 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add column id int not null;
+Query OK, 0 rows affected (0.7713 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> show create table cutomers;
+ERROR: 1146: Table 'orders.cutomers' doesn't exist
+MySQL [localhost:33060+ ssl/orders] SQL> show create table customers;
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------------------------------------------+
+| Table     | Create Table
+
+
+
+
+                                                     |
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------------------------------------------+
+| customers | CREATE TABLE `customers` (
+  `id_c` int NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `company_name` varchar(50) DEFAULT NULL,
+  `street_1` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `zipcode` varchar(50) DEFAULT NULL,
+  `phone` int DEFAULT NULL,
+  `fax` varchar(50) DEFAULT NULL,
+  `e_mail` varchar(50) DEFAULT NULL,
+  `id` int NOT NULL,
+  PRIMARY KEY (`id_c`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------------------------------------------+
+1 row in set (0.0025 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint salesrefs_fk foreign k
+                                         alter table customers add constraint salesrefs_fk foreign k
+ey (s_id) references salesrefs (s_id) on delete cascade on update cascade;
+ERROR: 1072: Key column 's_id' doesn't exist in table
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint salesrefs_fk foreign k
+ey (id) references salesrefs (s_id) on delete cascade on update cascade;
+ERROR: 1824: Failed to open the referenced table 'salesrefs'
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint salesrefs_fk foreign k
+ey (id) references salesreps (s_id) on delete cascade on update cascade;
+Query OK, 0 rows affected (3.0272 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint salesrefs_fk foreign k
+                                         desc customers;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| id_c         | int         | NO   | PRI | NULL    | auto_increment |
+| last_name    | varchar(50) | NO   |     | NULL    |                |
+| first_name   | varchar(50) | NO   |     | NULL    |                |
+| company_name | varchar(50) | YES  |     | NULL    |                |
+| street_1     | varchar(50) | YES  |     | NULL    |                |
+| city         | varchar(50) | YES  |     | NULL    |                |
+| state        | varchar(50) | YES  |     | NULL    |                |
+| zipcode      | varchar(50) | YES  |     | NULL    |                |
+| phone        | int         | YES  |     | NULL    |                |
+| fax          | varchar(50) | YES  |     | NULL    |                |
+| e_mail       | varchar(50) | YES  |     | NULL    |                |
+| id           | int         | NO   | MUL | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+12 rows in set (0.0046 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> desc ordes;
+ERROR: 1146: Table 'orders.ordes' doesn't exist
+MySQL [localhost:33060+ ssl/orders] SQL> desc orders;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| id_o       | int         | NO   | PRI | NULL    | auto_increment |
+| id_c       | int         | NO   |     | NULL    |                |
+| order_date | date        | NO   |     | NULL    |                |
+| shipdate   | date        | YES  |     | NULL    |                |
+| paiddate   | date        | YES  |     | NULL    |                |
+| status     | varchar(50) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+6 rows in set (0.0052 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint customers_fk foreign k
+ey (id_c) references orders (id_c) on delete cascade on update cascade;
+ERROR: 1822: Failed to add the foreign key constraint. Missing index for constraint 'customers_fk' i
+n the referenced table 'orders'
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint customers_fk foreign k
+ey (id_c) references orders (id_c) on delete cascade on update cascade;
+ERROR: 1822: Failed to add the foreign key constraint. Missing index for constraint 'customers_fk' i
+n the referenced table 'orders'
+MySQL [localhost:33060+ ssl/orders] SQL> alter table customers add constraint customers_fk foreign k
+ey (id_c) references orders (id_c) on delete cascade on update cascade;
+ERROR: 1822: Failed to add the foreign key constraint. Missing index for constraint 'customers_fk' i
+n the referenced table 'orders'
+MySQL [localhost:33060+ ssl/orders] SQL> alter table cutomers add constraint customers_fk foreign ke
+                                         alter table customers add constraint customers_fk foreign k
+ey (id_c) references orders (id_c) on delete cascade on update cascade;
+ERROR: 1822: Failed to add the foreign key constraint. Missing index for constraint 'customers_fk' i
+n the referenced table 'orders'
+MySQL [localhost:33060+ ssl/orders] SQL> show create table customers;
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------+
+| Table     | Create Table
+
+
+
+
+
+                                                                                                  |
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------+
+| customers | CREATE TABLE `customers` (
+  `id_c` int NOT NULL AUTO_INCREMENT,
+  `last_name` varchar(50) NOT NULL,
+  `first_name` varchar(50) NOT NULL,
+  `company_name` varchar(50) DEFAULT NULL,
+  `street_1` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `state` varchar(50) DEFAULT NULL,
+  `zipcode` varchar(50) DEFAULT NULL,
+  `phone` int DEFAULT NULL,
+  `fax` varchar(50) DEFAULT NULL,
+  `e_mail` varchar(50) DEFAULT NULL,
+  `id` int NOT NULL,
+  PRIMARY KEY (`id_c`),
+  KEY `salesrefs_fk` (`id`),
+  CONSTRAINT `salesrefs_fk` FOREIGN KEY (`id`) REFERENCES `salesreps` (`s_id`) ON DELETE CASCADE ON
+UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++-----------+---------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------+
+1 row in set (0.0017 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> show create table orders;
++--------+------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------+
+| Table  | Create Table
+
+
+                 |
++--------+------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------+
+| orders | CREATE TABLE `orders` (
+  `id_o` int NOT NULL AUTO_INCREMENT,
+  `id_c` int NOT NULL,
+  `order_date` date NOT NULL,
+  `shipdate` date DEFAULT NULL,
+  `paiddate` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id_o`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
++--------+------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------
+-----------------+
+1 row in set (0.0042 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table orders add constraint customers_fk foreign key
+(id_c) references customers (id_c) on delete cascade on update cascade;
+Query OK, 0 rows affected (2.9776 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> alter table items add constraint orders_fk foreign key (id_
+o) references orders (id_o) on delete cascade on update cascade;
+Query OK, 0 rows affected (1.5527 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> alter table items add constraint orders_fk foreign key (id_
+p) references parts (id_p) on delete cascade on update cascade;
+ERROR: 1061: Duplicate key name 'orders_fk'
+MySQL [localhost:33060+ ssl/orders] SQL> desc parts;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id_p       | varchar(50)  | NO   | PRI | NULL    |       |
+| decription | varchar(200) | NO   |     | NULL    |       |
+| unitpirce  | int          | NO   |     | NULL    |       |
+| onhand     | varchar(50)  | NO   |     | NULL    |       |
+| reorder    | varchar(50)  | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.0050 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> alter table items add constraint parts_fk foreign key (id_p
+) references parts (id_p) on delete cascade on update cascade;
+Query OK, 0 rows affected (2.7562 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+MySQL [localhost:33060+ ssl/orders] SQL> desc parts;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| id_p       | varchar(50)  | NO   | PRI | NULL    |       |
+| decription | varchar(200) | NO   |     | NULL    |       |
+| unitpirce  | int          | NO   |     | NULL    |       |
+| onhand     | varchar(50)  | NO   |     | NULL    |       |
+| reorder    | varchar(50)  | NO   |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.0052 sec)
+MySQL [localhost:33060+ ssl/orders] SQL> desc items;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id_i    | varchar(50) | NO   | PRI | NULL    |       |
+| id_o    | int         | NO   | MUL | NULL    |       |
+| id_p    | varchar(50) | NO   | MUL | NULL    |       |
+| quanity | int         | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.0039 sec)
+MySQL [localhost:33060+ ssl/orders] SQL>
