@@ -1,0 +1,188 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+MySQL Error 2026: error:00000000:lib(0)::reason(0)
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 12 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> create database company;
+Query OK, 1 row affected (0.5403 sec)
+MySQL [localhost:33060+ ssl] SQL> use company
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/company] SQL> use company;
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/company] SQL> create table employee(employeeid int primary key, fullname varchar(50) not null,techonolo)
+                                          create table employee(employeeid int primary key, fullname varchar(50) not null,techonolog
+y varchar(50) not null,salary float not null,gender varchar(50) not null, ahA!ge int not null);
+Query OK, 0 rows affected (1.2672 sec)
+MySQL [localhost:33060+ ssl/company] SQL> insert into e,ployee (employeeid, fullname,technology,salary,gender,age) values (1001, '')
+                                          insert into e,ployee (employeeid, fullname,technology,salary,gender,age) values (1001, '')
+                                          insert into e,ployee (employeeid, fullname,technology,salary,gender,age) values (1001, '')
+                                          insert into e,ployee (employeeid, fullname,technology,salary,gender,age) values (1001,'j')
+                                          insert into e,ployee (employeeid, fullname,technology,salary,gender,age) values (1001,'joh
+
+ProjectName VARCHAR(200) NOT NULL,
+EmployeeId INT,
+StartDate DATETIME,
+EndDate DATETIME,
+FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId));
+
+INSERT INTO Projects (ProjectName, EmployeeId, StartDate, EndDate) 
+VALUES ('Develop Ecommerse Website from scratch', 1003, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('WordPress Website for our company', 1002, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Manage our Company Servers', 1007, NOW(), DATE_ADD(NOW(), INTERVAL 45 DAY)),
+('Hosting account is not working', 1009, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1010, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY)),
+('Migrate web application and database to new server', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 5 DAY)),
+('Android Application development', 1004, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY)),
+('Hosting account is not working', 1001, NOW(), DATE_ADD(NOW(), INTERVAL 7 DAY)),
+('MySQL database from my desktop application', 1008, NOW(), DATE_ADD(NOW(), INTERVAL 15 DAY)),
+('Develop new WordPress plugin for my business website', NULL, NOW(), DATE_ADD(NOW(), INTERVAL 10 DAY));
+
+
+CREATE TABLE Address(
+AddressId INT PRIMARY KEY AUTO_INCREMENT,
+EmployeeId INT,
+Country VARCHAR(50),
+State VARCHAR(50),
+City VARCHAR(50),
+FOREIGN KEY (EmployeeId) REFERENCES Employee(EmployeeId));
+
+INSERT INTO Address (EmployeeId, Country, State, City) 
+Values (1001, 'India', 'Odisha', 'BBSR'),
+(1002, 'India', 'Maharashtra', 'Mumbai'),
+(1003, 'India', 'Maharashtra', 'Pune'),
+(1004, 'India', 'Odisha', 'Cuttack'),
+(1005, 'India', 'Maharashtra', 'Nagpur'),
+(1006, 'India', 'Odisha', 'BBSR');
+
+
+n doe','java',3500,'male',25);
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right synt
+ax to use near ',ployee (employeeid, fullname,technology,salary,gender,age) values (1001,'john d' at line 1
+MySQL [localhost:33060+ ssl/company] SQL> desc employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employeeid  | int         | NO   | PRI | NULL    |       |
+| fullname    | varchar(50) | NO   |     | NULL    |       |
+| techonology | varchar(50) | NO   |     | NULL    |       |
+| salary      | float       | NO   |     | NULL    |       |
+| gender      | varchar(50) | NO   |     | NULL    |       |
+| ahA!ge       | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.0215 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select * from employee;
+Empty set (0.0016 sec)
+MySQL [localhost:33060+ ssl/company] SQL> desc employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| employeeid  | int         | NO   | PRI | NULL    |       |
+| fullname    | varchar(50) | NO   |     | NULL    |       |
+| techonology | varchar(50) | NO   |     | NULL    |       |
+| salary      | float       | NO   |     | NULL    |       |
+| gender      | varchar(50) | NO   |     | NULL    |       |
+| ahA!ge       | int         | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+6 rows in set (0.0041 sec)
+MySQL [localhost:33060+ ssl/company] SQL> desc adress;
+ERROR: 1146: Table 'company.adress' doesn't exist
+MySQL [localhost:33060+ ssl/company] SQL> desc address;
++------------+-------------+------+-----+---------+----------------+
+| Field      | Type        | Null | Key | Default | Extra          |
++------------+-------------+------+-----+---------+----------------+
+| AddressId  | int         | NO   | PRI | NULL    | auto_increment |
+| EmployeeId | int         | YES  | MUL | NULL    |                |
+| Country    | varchar(50) | YES  |     | NULL    |                |
+| State      | varchar(50) | YES  |     | NULL    |                |
+| City       | varchar(50) | YES  |     | NULL    |                |
++------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.0055 sec)
+MySQL [localhost:33060+ ssl/company] SQL> desc proyects;
+ERROR: 1146: Table 'company.proyects' doesn't exist
+MySQL [localhost:33060+ ssl/company] SQL> desc projects;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| ProjectId   | int          | NO   | PRI | NULL    | auto_increment |
+| ProjectName | varchar(200) | NO   |     | NULL    |                |
+| EmployeeId  | int          | YES  | MUL | NULL    |                |
+| StartDate   | datetime     | YES  |     | NULL    |                |
+| EndDate     | datetime     | YES  |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+5 rows in set (0.0050 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select * from employee;
++------------+-------------------+-------------+--------+--------+-------+
+| employeeid | fullname          | techonology | salary | gender | ahA!ge |
++------------+-------------------+-------------+--------+--------+-------+
+|       1001 | John Doe          | Java        |  35000 | Male   |    25 |
+|       1002 | Mary Smith        | Java        |  45000 | Female |    27 |
+|       1003 | James Brown       | Java        |  50000 | Male   |    28 |
+|       1004 | Mike Walker       | .NET        |  50000 | Male   |    28 |
+|       1005 | Linda Jones       | .NET        |  75000 | Female |    26 |
+|       1006 | Anurag Mohanty    | .NET        |  35000 | Male   |    25 |
+|       1007 | Priyanla Dewangan | .NET        |  45000 | Female |    27 |
+|       1008 | John Depp         | Java        |  37000 | Male   |    27 |
+|       1009 | luis ruiz         | Java        |  40000 | Male   |    22 |
+|       1010 | John castron      | Java        |  45000 | Male   |    25 |
++------------+-------------------+-------------+--------+--------+-------+
+10 rows in set (0.0044 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select * from address;
++-----------+------------+---------+-------------+---------+
+| AddressId | EmployeeId | Country | State       | City    |
++-----------+------------+---------+-------------+---------+
+|         1 |       1001 | India   | Odisha      | BBSR    |
+|         2 |       1002 | India   | Maharashtra | Mumbai  |
+|         3 |       1003 | India   | Maharashtra | Pune    |
+|         4 |       1004 | India   | Odisha      | Cuttack |
+|         5 |       1005 | India   | Maharashtra | Nagpur  |
+|         6 |       1006 | India   | Odisha      | BBSR    |
++-----------+------------+---------+-------------+---------+
+6 rows in set (0.0025 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select a.projectname, b.fullname from projects a inner join emloyee b on a.employeeid = b.
+                                          select a.projectname, b.fullname from projects a inner join emloyee b on a.employeeid = b.
+employeeid;
+ERROR: 1146: Table 'company.emloyee' doesn't exist
+MySQL [localhost:33060+ ssl/company] SQL> select a.projectname, b.fullname from projects a inner join employee b on a.employeeid = b
+.employeeid;
++--------------------------------------------+-------------------+
+| projectname                                | fullname          |
++--------------------------------------------+-------------------+
+| Develop Ecommerse Website from scratch     | James Brown       |
+| WordPress Website for our company          | Mary Smith        |
+| Manage our Company Servers                 | Priyanla Dewangan |
+| Hosting account is not working             | luis ruiz         |
+| MySQL database from my desktop application | John castron      |
+| Android Application development            | Mike Walker       |
+| Hosting account is not working             | John Doe          |
+| MySQL database from my desktop application | John Depp         |
++--------------------------------------------+-------------------+
+8 rows in set (0.0026 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select * from employee where employeeid not in (select employeeid from address);
++------------+-------------------+-------------+--------+--------+-------+
+| employeeid | fullname          | techonology | salary | gender | ahA!ge |
++------------+-------------------+-------------+--------+--------+-------+
+|       1007 | Priyanla Dewangan | .NET        |  45000 | Female |    27 |
+|       1008 | John Depp         | Java        |  37000 | Male   |    27 |
+|       1009 | luis ruiz         | Java        |  40000 | Male   |    22 |
+|       1010 | John castron      | Java        |  45000 | Male   |    25 |
++------------+-------------------+-------------+--------+--------+-------+
+4 rows in set (0.0295 sec)
+MySQL [localhost:33060+ ssl/company] SQL> select * from employee where employeeid not in (select employeeid from projects);
+Empty set (0.0025 sec)
+MySQL [localhost:33060+ ssl/company] SQL>
