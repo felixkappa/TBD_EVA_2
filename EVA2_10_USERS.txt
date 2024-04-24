@@ -1,0 +1,414 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 11 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> create user 'prueba'@'localhost' identified by 'xxx.123';
+Query OK, 0 rows affected (0.4392 sec)
+MySQL [localhost:33060+ ssl] SQL> show databases;
++--------------------+
+| Database           |
++--------------------+
+| agencia            |
+| company            |
+| empresa            |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| tb1                |
+| tbd2               |
+| tbd_1              |
+| world              |
++--------------------+
+13 rows in set (0.0027 sec)
+MySQL [localhost:33060+ ssl] SQL> use mysql;
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/mysql] SQL> use mysql
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/mysql] SQL> use mysql;
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/mysql] SQL> use mysql
+Default schema set to `mysql`.
+Fetching global names, object names from `mysql` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/mysql] SQL> show tables;
++------------------------------------------------------+
+| Tables_in_mysql                                      |
++------------------------------------------------------+
+| columns_priv                                         |
+| component                                            |
+| db                                                   |
+| default_roles                                        |
+| engine_cost                                          |
+| func                                                 |
+| general_log                                          |
+| global_grants                                        |
+| gtid_executed                                        |
+| help_category                                        |
+| help_keyword                                         |
+| help_relation                                        |
+| help_topic                                           |
+| innodb_index_stats                                   |
+| innodb_table_stats                                   |
+| ndb_binlog_index                                     |
+| password_history                                     |
+| plugin                                               |
+| procs_priv                                           |
+| proxies_priv                                         |
+| replication_asynchronous_connection_failover         |
+| replication_asynchronous_connection_failover_managed |
+| replication_group_configuration_version              |
+| replication_group_member_actions                     |
+| role_edges                                           |
+| server_cost                                          |
+| servers                                              |
+| slave_master_info                                    |
+| slave_relay_log_info                                 |
+| slave_worker_info                                    |
+| slow_log                                             |
+| tables_priv                                          |
+| time_zone                                            |
+| time_zone_leap_second                                |
+| time_zone_name                                       |
+| time_zone_transition                                 |
+| time_zone_transition_type                            |
+| user                                                 |
++------------------------------------------------------+
+38 rows in set (0.0054 sec)
+MySQL [localhost:33060+ ssl/mysql] SQL> desc user;
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+| Field                    | Type                              | Null | Key | Default               | Extra |
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+| Host                     | char(255)                         | NO   | PRI |                       |       |
+| User                     | char(32)                          | NO   | PRI |                       |       |
+| Select_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Insert_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Update_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Delete_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Drop_priv                | enum('N','Y')                     | NO   |     | N                     |       |
+| Reload_priv              | enum('N','Y')                     | NO   |     | N                     |       |
+| Shutdown_priv            | enum('N','Y')                     | NO   |     | N                     |       |
+| Process_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| File_priv                | enum('N','Y')                     | NO   |     | N                     |       |
+| Grant_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| References_priv          | enum('N','Y')                     | NO   |     | N                     |       |
+| Index_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Alter_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Show_db_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Super_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_tmp_table_priv    | enum('N','Y')                     | NO   |     | N                     |       |
+| Lock_tables_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Execute_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Repl_slave_priv          | enum('N','Y')                     | NO   |     | N                     |       |
+| Repl_client_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_view_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Show_view_priv           | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_routine_priv      | enum('N','Y')                     | NO   |     | N                     |       |
+| Alter_routine_priv       | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_user_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Event_priv               | enum('N','Y')                     | NO   |     | N                     |       |
+| Trigger_priv             | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_tablespace_priv   | enum('N','Y')                     | NO   |     | N                     |       |
+| ssl_type                 | enum('','ANY','X509','SPECIFIED') | NO   |     |                       |       |
+| ssl_cipher               | blob                              | NO   |     | NULL                  |       |
+| x509_issuer              | blob                              | NO   |     | NULL                  |       |
+| x509_subject             | blob                              | NO   |     | NULL                  |       |
+| max_questions            | int unsigned                      | NO   |     | 0                     |       |
+| max_updates              | int unsigned                      | NO   |     | 0                     |       |
+| max_connections          | int unsigned                      | NO   |     | 0                     |       |
+| max_user_connections     | int unsigned                      | NO   |     | 0                     |       |
+| plugin                   | char(64)                          | NO   |     | caching_sha2_password |       |
+| authentication_string    | text                              | YES  |     | NULL                  |       |
+| password_expired         | enum('N','Y')                     | NO   |     | N                     |       |
+| password_last_changed    | timestamp                         | YES  |     | NULL                  |       |
+| password_lifetime        | smallint unsigned                 | YES  |     | NULL                  |       |
+| account_locked           | enum('N','Y')                     | NO   |     | N                     |       |
+| Create_role_priv         | enum('N','Y')                     | NO   |     | N                     |       |
+| Drop_role_priv           | enum('N','Y')                     | NO   |     | N                     |       |
+| Password_reuse_history   | smallint unsigned                 | YES  |     | NULL                  |       |
+| Password_reuse_time      | smallint unsigned                 | YES  |     | NULL                  |       |
+| Password_require_current | enum('N','Y')                     | YES  |     | NULL                  |       |
+| User_attributes          | json                              | YES  |     | NULL                  |       |
++--------------------------+-----------------------------------+------+-----+-----------------------+-------+
+51 rows in set (0.0074 sec)
+MySQL [localhost:33060+ ssl/mysql] SQL> select host, user from user;
++-----------+------------------+
+| host      | user             |
++-----------+------------------+
+| localhost | mysql.infoschema |
+| localhost | mysql.session    |
+| localhost | mysql.sys        |
+| localhost | prueba           |
+| localhost | root             |
++-----------+------------------+
+5 rows in set (0.0017 sec)
+MySQL [localhost:33060+ ssl/mysql] SQL> c mc-- prueba@localhost xxx.123;
+                                     ->
+                                     -> c mc-- prueba@localhost
+                                     -> \c mc-- prueba@localhost
+ERROR: Unknown command '\c'
+                                     -> \c mc-- prueba@localhost
+ERROR: Unknown command '\c'
+                                     -> \connect --mc prueba@localhost
+ERROR: Unknown command '\c'
+                                     -> hola
+                                     -> \connect --mc prueba@localhost
+ERROR: Unknown command '\c'
+                                     -> \connect --mc prueba@localhost
+ERROR: Unknown command '\c'
+                                     -> select host, user from user;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right synt
+ax to use near 'c mc-- prueba@localhost xxx.123;
+
+c mc-- prueba@localhost
+ mc-- prueba@localhost' at line 1
+MySQL [localhost:33060+ ssl/mysql] SQL> c mc-- prueba@localhost xxx.123;  c mc-- prueba@localhost  mc-- prueba@localhost  mc-- prueb
+a@localhost onnect --mc prueba@localhostc mc-- prueba@localhost xxx.123;  c mc-- prueba@localhost  mc-- prueba@localhost  mc-- prueb
+a@localhost onnect --mc prueba@localhostc mc-- prueba@localhost xxx.123;  c mc-- prueba@localhost  mc-- prueba@localhost  mc-- prueb
+a@localhost onnect --mc prueba@localhostc mc-- prueba@localhost xxx.123;  c mc-- prueba@localhost  mc-- prueba@localhost  mc-- prueb
+a@localhost onnect --mc prueba@localhostuser sakila;
+ERROR: 1064: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right synt
+ax to use near 'user sakila' at line 1
+MySQL [localhost:33060+ ssl/mysql] SQL> \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *******
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 12
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| performance_schema |
++--------------------+
+2 rows in set (0.0027 sec)
+MySQL [localhost:3306 ssl] SQL> drop databases information_schema;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the ri
+ght syntax to use near 'databases information_schema' at line 1
+MySQL [localhost:3306 ssl] SQL> create table foco;
+ERROR: 1046 (3D000): No database selected
+MySQL [localhost:3306 ssl] SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 13 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> show databases;
++--------------------+
+| Database           |
++--------------------+
+| agencia            |
+| company            |
+| empresa            |
+| information_schema |
+| mysql              |
+| orders             |
+| performance_schema |
+| sakila             |
+| sys                |
+| tb1                |
+| tbd2               |
+| tbd_1              |
+| world              |
++--------------------+
+13 rows in set (0.0032 sec)
+MySQL [localhost:33060+ ssl] SQL> grant all on company.* to 'prueba'@'localhost';
+Query OK, 0 rows affected (0.1892 sec)
+MySQL [localhost:33060+ ssl] SQL> \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *******
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 14
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *******
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 15
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> \connect --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *******
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 16
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> show databases;
++--------------------+
+| Database           |
++--------------------+
+| company            |
+| information_schema |
+| performance_schema |
++--------------------+
+3 rows in set (0.0033 sec)
+MySQL [localhost:3306 ssl] SQL> show tables;
+ERROR: 1046 (3D000): No database selected
+MySQL [localhost:3306 ssl] SQL> use company;
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+MySQL [localhost:3306 ssl/company] SQL> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| address           |
+| employee          |
+| projects          |
++-------------------+
+3 rows in set (0.0034 sec)
+MySQL [localhost:3306 ssl/company] SQL> creaate table x(id int);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the ri
+ght syntax to use near 'creaate table x(id int)' at line 1
+MySQL [localhost:3306 ssl/company] SQL> create table x(id int);
+Query OK, 0 rows affected (0.3394 sec)
+MySQL [localhost:3306 ssl/company] SQL> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| address           |
+| employee          |
+| projects          |
+| x                 |
++-------------------+
+4 rows in set (0.0034 sec)
+MySQL [localhost:3306 ssl/company] SQL> select * from address limit 10;
++-----------+------------+---------+-------------+---------+
+| AddressId | EmployeeId | Country | State       | City    |
++-----------+------------+---------+-------------+---------+
+|         1 |       1001 | India   | Odisha      | BBSR    |
+|         2 |       1002 | India   | Maharashtra | Mumbai  |
+|         3 |       1003 | India   | Maharashtra | Pune    |
+|         4 |       1004 | India   | Odisha      | Cuttack |
+|         5 |       1005 | India   | Maharashtra | Nagpur  |
+|         6 |       1006 | India   | Odisha      | BBSR    |
++-----------+------------+---------+-------------+---------+
+6 rows in set (0.0559 sec)
+MySQL [localhost:3306 ssl/company] SQL> create database pruebaprivilegios;
+ERROR: 1044 (42000): Access denied for user 'prueba'@'localhost' to database 'pruebaprivilegios'
+MySQL [localhost:3306 ssl/company] SQL> create user 'pruebax'@'localhost' identified by  'xxx.123';
+ERROR: 1227 (42000): Access denied; you need (at least one of) the CREATE USER privilege(s) for this operation
+MySQL [localhost:3306 ssl/company] SQL> \c --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 17
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 18
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> create user 'pruebax'@'localhost' identified by 'xxx.123';
+Query OK, 0 rows affected (0.1636 sec)
+MySQL [localhost:3306 ssl] SQL> grant select on company.* to 'pruebax'@'localhost';
+Query OK, 0 rows affected (0.1036 sec)
+MySQL [localhost:3306 ssl] SQL> \c --mc prueba@localhost
+Creating a Classic session to 'prueba@localhost'
+Please provide the password for 'prueba@localhost': *******
+Save password for 'prueba@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 19
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> show tables
+                             -> show tables;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the ri
+ght syntax to use near 'show tables' at line 2
+MySQL [localhost:3306 ssl] SQL> use company;
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+MySQL [localhost:3306 ssl/company] SQL> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| address           |
+| employee          |
+| projects          |
+| x                 |
++-------------------+
+4 rows in set (0.0044 sec)
+MySQL [localhost:3306 ssl/company] SQL> delete from address;
+Query OK, 6 rows affected (0.1409 sec)
+MySQL [localhost:3306 ssl/company] SQL> /connect --mc root@localhost
+                                     ->
+                                     ->
+                                     -> use sakila;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the ri
+ght syntax to use near '/connect --mc root@localhost
+
+
+use sakila' at line 1
+MySQL [localhost:3306 ssl/company] SQL> \connect --mc root@localhost
+Creating a Classic session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Closing old connection...
+Your MySQL connection id is 20
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> create user 'pruebay'@'localhost' identified by 'xxx.123';
+Query OK, 0 rows affected (0.1329 sec)
+MySQL [localhost:3306 ssl] SQL> grant select(employeeid) on company.address to 'pruebay'@'localhost';
+Query OK, 0 rows affected (0.0850 sec)
+MySQL [localhost:3306 ssl] SQL> \connect --mc pruebay@localhost
+Creating a Classic session to 'pruebay@localhost'
+Please provide the password for 'pruebay@localhost': *******
+Save password for 'pruebay@localhost'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching global names for auto-completion... Press ^C to stop.
+Error during auto-completion cache update: Access denied; you need (at least one of) the PROCESS privilege(s) for this operation
+Closing old connection...
+Your MySQL connection id is 21
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:3306 ssl] SQL> use company;
+Default schema set to `company`.
+Fetching global names, object names from `company` for auto-completion... Press ^C to stop.
+MySQL [localhost:3306 ssl/company] SQL> show tables;
++-------------------+
+| Tables_in_company |
++-------------------+
+| address           |
++-------------------+
+1 row in set (0.0042 sec)
+MySQL [localhost:3306 ssl/company] SQL> select * from address;
+ERROR: 1143 (42000): SELECT command denied to user 'pruebay'@'localhost' for column 'AddressId' in table 'address'
+MySQL [localhost:3306 ssl/company] SQL> select employeeid from address;
+Empty set (0.0017 sec)
+MySQL [localhost:3306 ssl/company] SQL>

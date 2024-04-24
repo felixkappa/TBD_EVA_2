@@ -1,0 +1,248 @@
+MySQL Shell 8.0.36
+
+Copyright (c) 2016, 2023, Oracle and/or its affiliates.
+Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
+Other names may be trademarks of their respective owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+MySQL JS> \sql
+Switching to SQL mode... Commands end with ;
+MySQL SQL> \c mc-- root@localhost
+Creating a session to 'root@localhost'
+Fetching global names for auto-completion... Press ^C to stop.
+Your MySQL connection id is 10 (X protocol)
+Server version: 8.0.36 MySQL Community Server - GPL
+No default schema selected; type \use <schema> to set one.
+MySQL [localhost:33060+ ssl] SQL> use empresa;
+Default schema set to `empresa`.
+Fetching global names, object names from `empresa` for auto-completion... Press ^C to stop.
+MySQL [localhost:33060+ ssl/empresa] SQL> show tables;
++-------------------+
+| Tables_in_empresa |
++-------------------+
+| countries         |
+| departments       |
+| employees         |
+| job_history       |
+| jobs              |
+| locations         |
+| regions           |
++-------------------+
+7 rows in set (0.0037 sec)
+MySQL [localhost:33060+ ssl/empresa] SQL> desc employee;
+ERROR: 1146: Table 'empresa.employee' doesn't exist
+MySQL [localhost:33060+ ssl/empresa] SQL> desc employees;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| EMPLOYEE_ID    | decimal(6,0) | NO   | PRI | 0       |       |
+| FIRST_NAME     | varchar(20)  | YES  |     | NULL    |       |
+| LAST_NAME      | varchar(25)  | NO   | MUL | NULL    |       |
+| EMAIL          | varchar(25)  | NO   | UNI | NULL    |       |
+| PHONE_NUMBER   | varchar(20)  | YES  |     | NULL    |       |
+| HIRE_DATE      | date         | NO   |     | NULL    |       |
+| JOB_ID         | varchar(10)  | NO   | MUL | NULL    |       |
+| SALARY         | decimal(8,2) | YES  |     | NULL    |       |
+| COMMISSION_PCT | decimal(2,2) | YES  |     | NULL    |       |
+| MANAGER_ID     | decimal(6,0) | YES  | MUL | NULL    |       |
+| DEPARTMENT_ID  | decimal(4,0) | YES  | MUL | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+11 rows in set (0.0045 sec)
+MySQL [localhost:33060+ ssl/empresa] SQL> desc departments;
++-----------------+--------------+------+-----+---------+-------+
+| Field           | Type         | Null | Key | Default | Extra |
++-----------------+--------------+------+-----+---------+-------+
+| DEPARTMENT_ID   | decimal(4,0) | NO   | PRI | 0       |       |
+| DEPARTMENT_NAME | varchar(30)  | NO   |     | NULL    |       |
+| MANAGER_ID      | decimal(6,0) | YES  | MUL | NULL    |       |
+| LOCATION_ID     | decimal(4,0) | YES  | MUL | NULL    |       |
++-----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.0040 sec)
+MySQL [localhost:33060+ ssl/empresa] SQL> select a.first_name, a.last_name, b.department_id from employees a inner join departments
+                                          select a.first_name, a.last_name, b.department_id from employees a inner join departments
+b on a.employee_id = b.employee_id;
+ERROR: 1054: Unknown column 'b.employee_id' in 'on clause'
+MySQL [localhost:33060+ ssl/empresa] SQL> select a.first_name, a.last_name, b.department_id from employees a inner join departments
+b on a.deparment_id = b.department_id;
+ERROR: 1054: Unknown column 'a.deparment_id' in 'on clause'
+MySQL [localhost:33060+ ssl/empresa] SQL> select a.first_name, a.last_name, b.department_id from employees a inner join departments
+b on a.department_id = b.department_id;
++-------------+-------------+---------------+
+| first_name  | last_name   | department_id |
++-------------+-------------+---------------+
+| Alexander   | Hunold      |            60 |
+| Bruce       | Ernst       |            60 |
+| David       | Austin      |            60 |
+| Valli       | Pataballa   |            60 |
+| Diana       | Lorentz     |            60 |
+| Matthew     | Weiss       |            50 |
+| Adam        | Fripp       |            50 |
+| Payam       | Kaufling    |            50 |
+| Shanta      | Vollman     |            50 |
+| Kevin       | Mourgos     |            50 |
+| Julia       | Nayer       |            50 |
+| Irene       | Mikkilineni |            50 |
+| James       | Landry      |            50 |
+| Steven      | Markle      |            50 |
+| Laura       | Bissot      |            50 |
+| Mozhe       | Atkinson    |            50 |
+| James       | Marlow      |            50 |
+| TJ          | Olson       |            50 |
+| Jason       | Mallin      |            50 |
+| Michael     | Rogers      |            50 |
+| Ki          | Gee         |            50 |
+| Hazel       | Philtanker  |            50 |
+| Renske      | Ladwig      |            50 |
+| Stephen     | Stiles      |            50 |
+| John        | Seo         |            50 |
+| Joshua      | Patel       |            50 |
+| Trenna      | Rajs        |            50 |
+| Curtis      | Davies      |            50 |
+| Randall     | Matos       |            50 |
+| Peter       | Vargas      |            50 |
+| Winston     | Taylor      |            50 |
+| Jean        | Fleaur      |            50 |
+| Martha      | Sullivan    |            50 |
+| Girard      | Geoni       |            50 |
+| Nandita     | Sarchand    |            50 |
+| Alexis      | Bull        |            50 |
+| Julia       | Dellinger   |            50 |
+| Anthony     | Cabrio      |            50 |
+| Kelly       | Chung       |            50 |
+| Jennifer    | Dilly       |            50 |
+| Timothy     | Gates       |            50 |
+| Randall     | Perkins     |            50 |
+| Sarah       | Bell        |            50 |
+| Britney     | Everett     |            50 |
+| Samuel      | McCain      |            50 |
+| Vance       | Jones       |            50 |
+| Alana       | Walsh       |            50 |
+| Kevin       | Feeney      |            50 |
+| Donald      | OConnell    |            50 |
+| Douglas     | Grant       |            50 |
+| Jennifer    | Whalen      |            10 |
+| Den         | Raphaely    |            30 |
+| Alexander   | Khoo        |            30 |
+| Shelli      | Baida       |            30 |
+| Sigal       | Tobias      |            30 |
+| Guy         | Himuro      |            30 |
+| Karen       | Colmenares  |            30 |
+| Steven      | King        |            90 |
+| Neena       | Kochhar     |            90 |
+| Lex         | De Haan     |            90 |
+| Nancy       | Greenberg   |           100 |
+| Daniel      | Faviet      |           100 |
+| John        | Chen        |           100 |
+| Ismael      | Sciarra     |           100 |
+| Jose Manuel | Urman       |           100 |
+| Luis        | Popp        |           100 |
+| Shelley     | Higgins     |           110 |
+| William     | Gietz       |           110 |
+| Michael     | Hartstein   |            20 |
+| Pat         | Fay         |            20 |
+| Susan       | Mavris      |            40 |
+| John        | Russell     |            80 |
+| Karen       | Partners    |            80 |
+| Alberto     | Errazuriz   |            80 |
+| Gerald      | Cambrault   |            80 |
+| Eleni       | Zlotkey     |            80 |
+| Peter       | Tucker      |            80 |
+| David       | Bernstein   |            80 |
+| Peter       | Hall        |            80 |
+| Christopher | Olsen       |            80 |
+| Nanette     | Cambrault   |            80 |
+| Oliver      | Tuvault     |            80 |
+| Janette     | King        |            80 |
+| Patrick     | Sully       |            80 |
+| Allan       | McEwen      |            80 |
+| Lindsey     | Smith       |            80 |
+| Louise      | Doran       |            80 |
+| Sarath      | Sewall      |            80 |
+| Clara       | Vishney     |            80 |
+| Danielle    | Greene      |            80 |
+| Mattea      | Marvins     |            80 |
+| David       | Lee         |            80 |
+| Sundar      | Ande        |            80 |
+| Amit        | Banda       |            80 |
+| Lisa        | Ozer        |            80 |
+| Harrison    | Bloom       |            80 |
+| Tayler      | Fox         |            80 |
+| William     | Smith       |            80 |
+| Elizabeth   | Bates       |            80 |
+| Sundita     | Kumar       |            80 |
+| Ellen       | Abel        |            80 |
+| Alyssa      | Hutton      |            80 |
+| Jonathon    | Taylor      |            80 |
+| Jack        | Livingston  |            80 |
+| Charles     | Johnson     |            80 |
+| Hermann     | Baer        |            70 |
++-------------+-------------+---------------+
+106 rows in set (0.0044 sec)
+MySQL [localhost:33060+ ssl/empresa] SQL> select a.first_name, a.last_name, b.department_id from employees a inner join departments
+b on a.manager_id = b.manager_id;
++-------------+------------+---------------+
+| first_name  | last_name  | department_id |
++-------------+------------+---------------+
+| Steven      | King       |           120 |
+| Steven      | King       |           130 |
+| Steven      | King       |           140 |
+| Steven      | King       |           150 |
+| Steven      | King       |           160 |
+| Steven      | King       |           170 |
+| Steven      | King       |           180 |
+| Steven      | King       |           190 |
+| Steven      | King       |           200 |
+| Steven      | King       |           210 |
+| Steven      | King       |           220 |
+| Steven      | King       |           230 |
+| Steven      | King       |           240 |
+| Steven      | King       |           250 |
+| Steven      | King       |           260 |
+| Steven      | King       |           270 |
+| Neena       | Kochhar    |            90 |
+| Lex         | De Haan    |            90 |
+| Den         | Raphaely   |            90 |
+| Matthew     | Weiss      |            90 |
+| Adam        | Fripp      |            90 |
+| Payam       | Kaufling   |            90 |
+| Shanta      | Vollman    |            90 |
+| Kevin       | Mourgos    |            90 |
+| John        | Russell    |            90 |
+| Karen       | Partners   |            90 |
+| Alberto     | Errazuriz  |            90 |
+| Gerald      | Cambrault  |            90 |
+| Eleni       | Zlotkey    |            90 |
+| Michael     | Hartstein  |            90 |
+| Bruce       | Ernst      |            60 |
+| David       | Austin     |            60 |
+| Valli       | Pataballa  |            60 |
+| Diana       | Lorentz    |            60 |
+| Daniel      | Faviet     |           100 |
+| John        | Chen       |           100 |
+| Ismael      | Sciarra    |           100 |
+| Jose Manuel | Urman      |           100 |
+| Luis        | Popp       |           100 |
+| Alexander   | Khoo       |            30 |
+| Shelli      | Baida      |            30 |
+| Sigal       | Tobias     |            30 |
+| Guy         | Himuro     |            30 |
+| Karen       | Colmenares |            30 |
+| Laura       | Bissot     |            50 |
+| Mozhe       | Atkinson   |            50 |
+| James       | Marlow     |            50 |
+| TJ          | Olson      |            50 |
+| Nandita     | Sarchand   |            50 |
+| Alexis      | Bull       |            50 |
+| Julia       | Dellinger  |            50 |
+| Anthony     | Cabrio     |            50 |
+| Peter       | Tucker     |            80 |
+| David       | Bernstein  |            80 |
+| Peter       | Hall       |            80 |
+| Christopher | Olsen      |            80 |
+| Nanette     | Cambrault  |            80 |
+| Oliver      | Tuvault    |            80 |
+| Pat         | Fay        |            20 |
+| William     | Gietz      |           110 |
++-------------+------------+---------------+
+60 rows in set (0.0027 sec)
+MySQL [localhost:33060+ ssl/empresa] SQL>
